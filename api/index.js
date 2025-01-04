@@ -97,6 +97,7 @@ let todos = [
 ];
 
 app.post("/login", (req, res) => {
+  console.log("login", req.body);
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -124,6 +125,7 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/verify", (req, res) => {
+  console.log("verify", req.cookies, req.body);
   const token = req.cookies.sso_token;
 
   if (!token) {
