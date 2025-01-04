@@ -3,20 +3,20 @@ import jwt from "jsonwebtoken";
 import cors from "cors";
 import { faker } from "@faker-js/faker";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const SECRET_KEY = "sso_secret_key";
+const SECRET_KEY = process.env.SECRET_KEY || "secret";
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:3002",
-      "http://localhost:5174",
-    ],
+    origin: [process.env.MAIN_APP_URL, process.env.EXTERNAL_APP_URL],
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
