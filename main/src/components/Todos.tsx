@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 
 interface Todo {
   id: string;
@@ -44,7 +44,7 @@ function Todos() {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/verify", {
+      const response = await api.get("/verify", {
         withCredentials: true,
       });
 
@@ -62,7 +62,7 @@ function Todos() {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/todos", {
+      const response = await api.get("/todos", {
         withCredentials: true,
       });
       setTodos(response.data);
@@ -79,8 +79,8 @@ function Todos() {
     }
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:4000/todos",
+      const response = await api.post(
+        "/todos",
         { title, description },
         { withCredentials: true }
       );
@@ -99,7 +99,7 @@ function Todos() {
   const deleteTodo = async (id: string) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:4000/todos/${id}`, {
+      await api.delete(`/todos/${id}`, {
         withCredentials: true,
       });
       setTodos(todos.filter((todo) => todo.id !== id));
@@ -114,11 +114,7 @@ function Todos() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        "http://localhost:4000/logout",
-        {},
-        { withCredentials: true }
-      );
+      await api.post("/logout", {}, { withCredentials: true });
       toast.success("Logged out successfully!");
       navigate("/");
     } catch (error) {
@@ -129,11 +125,11 @@ function Todos() {
 
   return (
     <div>
-      <header className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold mb-4">Todos</h2>
+      <header className="flex items-center justify-between">
+        <h2 className="mb-4 text-2xl font-bold">Todos</h2>
         <button
           onClick={handleLogout}
-          className="mb-4 bg-red-500 text-white p-2 rounded-full"
+          className="p-2 mb-4 text-white bg-red-500 rounded-full"
         >
           Logout
         </button>
@@ -151,7 +147,7 @@ function Todos() {
           value={title}
           required
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mb-2"
+          className="w-full p-2 mb-2 border border-gray-300 rounded"
         />
         <input
           type="text"
@@ -159,11 +155,11 @@ function Todos() {
           value={description}
           required
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mb-2"
+          className="w-full p-2 mb-2 border border-gray-300 rounded"
         />
         <button
           onClick={addTodo}
-          className="w-full bg-green-500 text-white p-2 rounded"
+          className="w-full p-2 text-white bg-green-500 rounded"
           disabled={loading}
         >
           {loading ? "Adding..." : "Add Todo"}
@@ -173,7 +169,7 @@ function Todos() {
         {todos.map((todo) => (
           <li
             key={todo.id}
-            className="flex justify-between items-center p-2 border-b"
+            className="flex items-center justify-between p-2 border-b"
           >
             <div>
               <h3 className="font-bold">{todo.title}</h3>
@@ -181,7 +177,7 @@ function Todos() {
             </div>
             <button
               onClick={() => deleteTodo(todo.id)}
-              className="bg-red-500 text-white p-1 rounded"
+              className="p-1 text-white bg-red-500 rounded"
               disabled={loading}
             >
               Delete

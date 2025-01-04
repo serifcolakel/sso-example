@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import api from "../api";
 
 function Login() {
   const [email, setEmail] = useState("admin@gmail.com");
@@ -16,11 +16,7 @@ function Login() {
     const returnUrl = searchParams.get("returnUrl");
     setLoading(true);
     try {
-      await axios.post(
-        "http://localhost:4000/login",
-        { email, password },
-        { withCredentials: true }
-      );
+      await api.post("/login", { email, password }, { withCredentials: true });
       toast.success("Login successful!");
       if (returnUrl) {
         window.location.href = returnUrl;
@@ -38,7 +34,7 @@ function Login() {
   return (
     <div className="max-w-md mx-auto">
       <ToastContainer />
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <h2 className="mb-4 text-2xl font-bold">Login</h2>
       <form onSubmit={handleLogin} className="space-y-4">
         <input
           type="email"
@@ -56,7 +52,7 @@ function Login() {
         />
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full p-2 text-white bg-blue-500 rounded"
           disabled={loading}
         >
           {loading ? "Logging in..." : "Login"}

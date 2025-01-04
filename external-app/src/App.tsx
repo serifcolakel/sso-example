@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Todos from "./components/Todos";
+import api from "./api";
+
+const MAIN_APP_URL = import.meta.env.VITE_MAIN_APP_URL;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -8,7 +10,7 @@ function App() {
   useEffect(() => {
     const verifyLogin = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/verify", {
+        const response = await api.get("/verify", {
           withCredentials: true,
         });
         if (response.data.authenticated) {
@@ -38,17 +40,17 @@ function App() {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4 mx-auto">
       {isLoggedIn ? (
         <Todos />
       ) : (
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">You are not logged in</h2>
+          <h2 className="mb-4 text-2xl font-bold">You are not logged in</h2>
           <a
-            href="http://localhost:5173?returnUrl=http://localhost:5174" // Link to the main app's login page with returnUrl
+            href={`${MAIN_APP_URL}?returnUrl=${window.location.href}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-500 text-white p-2 rounded"
+            className="p-2 text-white bg-blue-500 rounded"
           >
             Go to Main App to Login
           </a>

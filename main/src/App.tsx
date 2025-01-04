@@ -6,10 +6,10 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import axios from "axios";
 import Todos from "./components/Todos";
 import Login from "./components/Login";
 import { toast } from "react-toastify";
+import api from "./api";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,7 +20,7 @@ function App() {
     const verifyLogin = async () => {
       const returnUrl = searchParams.get("returnUrl");
       try {
-        const response = await axios.get("http://localhost:4000/verify", {
+        const response = await api.get("/verify", {
           withCredentials: true,
         });
         if (response.data.authenticated) {
@@ -55,7 +55,7 @@ function App() {
   }, [navigate, searchParams]);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4 mx-auto">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
