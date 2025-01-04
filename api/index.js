@@ -96,6 +96,10 @@ let todos = [
   },
 ];
 
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to the API" });
+});
+
 app.post("/login", (req, res) => {
   console.log("login", req.body);
   const { email, password } = req.body;
