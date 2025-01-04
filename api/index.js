@@ -13,7 +13,6 @@ const SECRET_KEY = process.env.SECRET_KEY || "secret";
 app.use(
   cors({
     origin: "*", // Allow all origins
-    credentials: true,
   })
 );
 
