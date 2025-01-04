@@ -1,3 +1,72 @@
+# How to Run Projects
+
+## API (Node.js with Express)
+
+1. Navigate to the `api` directory:
+
+   ```bash
+   cd api
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the `api` directory with the following content:
+
+   ```plaintext
+   SECRET_KEY=your_secret_key
+   ```
+
+4. Start the API server:
+
+   ```bash
+   npm start
+   npm run dev (for development)
+   ```
+
+## Main Application (React)
+
+1. Navigate to the `main-app` directory:
+
+   ```bash
+   cd main-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the React development server:
+
+   ```bash
+   npm start
+   ```
+
+## External Application (React)
+
+1. Navigate to the `external-app` directory:
+
+   ```bash
+   cd external-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the React development server:
+
+   ```bash
+   npm start
+   ```
+
 # Single Sign-On (SSO): A Comprehensive Guide
 
 Single Sign-On (SSO) is an authentication mechanism that allows users to log in once and access multiple connected applications or systems without needing to reauthenticate for each one. SSO centralizes user authentication into a single, trusted system (often called an Identity Provider, or IdP), which then manages credentials and issues tokens or session data to verify the user's identity across other services (known as Service Providers, or SPs).
