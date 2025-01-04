@@ -17,6 +17,10 @@ In this guide, we'll explore how SSO works, its benefits and disadvantages, comm
     - [3. External Application (React)](#3-external-application-react)
 - [Conclusion](#conclusion)
 
+## Demo Video
+
+https://github.com/user-attachments/assets/3f94f0c2-c024-4ef3-879c-e72099d14eee
+
 ## Links
 
 - [GitHub Repository]()
