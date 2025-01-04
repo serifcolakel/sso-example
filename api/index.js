@@ -12,7 +12,7 @@ const SECRET_KEY = process.env.SECRET_KEY || "secret";
 
 app.use(
   cors({
-    origin: [process.env.MAIN_APP_URL, process.env.EXTERNAL_APP_URL],
+    origin: "*", // Allow all origins
     credentials: true,
   })
 );
